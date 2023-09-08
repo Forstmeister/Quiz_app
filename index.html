@@ -8,10 +8,61 @@
       rel="stylesheet"
       href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
     />
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./script.js"></script>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./img/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./img/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./img/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./img/site.webmanifest" />
     <title>Quiz APP</title>
   </head>
   <body>
-    <div><h1>Quiz APP</h1></div>
+    <nav
+      class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light"
+    >
+      <div class="container-fluid">
+        <span class="navbar navbar-dark bg-dark navbar-brand mb-0 h1"
+          >Quiz App</span
+        >
+      </div>
+    </nav>
+    <main>
+      <div data-bs-theme="dark" class="card quiz-card">
+        <div class="card-body">
+          <h5 class="card-title d-flex justify-content-center mb-3">Frage</h5>
+
+          <div class="card mb-2">
+            <div class="card-body">Antwort</div>
+          </div>
+          <div class="card mb-2">
+            <div class="card-body">Antwort</div>
+          </div>
+          <div class="card mb-2">
+            <div class="card-body">Antwort</div>
+          </div>
+          <div class="card mb-2">
+            <div class="card-body">Antwort</div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <a href="#" class="btn btn-dark border">nächste Frage</a>
+            <div><b>1</b> von <b>5</b> Fragen</div>
+          </div>
+        </div>
+      </div>
+    </main>
   </body>
 </html>
