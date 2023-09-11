@@ -30,39 +30,93 @@
     <link rel="manifest" href="./img/site.webmanifest" />
     <title>Quiz APP</title>
   </head>
-  <body>
-    <nav
-      class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light"
-    >
-      <div class="container-fluid">
-        <span class="navbar navbar-dark bg-dark navbar-brand mb-0 h1"
-          >Quiz App</span
-        >
-      </div>
-    </nav>
-    <main>
-      <div data-bs-theme="dark" class="card quiz-card">
-        <div class="card-body">
-          <h5 class="card-title d-flex justify-content-center mb-3">Frage</h5>
+  <body onload="init()">
+    <div>
+      <nav
+        class="navbar navbar-dark bg-dark navbar-expand-lg navbar-light bg-light"
+      >
+        <div class="container-fluid">
+          <span class="navbar navbar-dark bg-dark navbar-brand mb-0 h1"
+            >Quiz App</span
+          >
+        </div>
+      </nav>
+      <main>
+        <div data-bs-theme="dark" class="card quiz-card">
+          <div class="card-body">
+            <div id="endScreen" class="card mb-2" style="display: none">
+              <div class="card-body text-center">
+                <h1>Quiz beendet !</h1>
+              </div>
+              <img src="./img/win.png" class="width-100" />
 
-          <div class="card mb-2">
-            <div class="card-body">Antwort</div>
-          </div>
-          <div class="card mb-2">
-            <div class="card-body">Antwort</div>
-          </div>
-          <div class="card mb-2">
-            <div class="card-body">Antwort</div>
-          </div>
-          <div class="card mb-2">
-            <div class="card-body">Antwort</div>
-          </div>
-          <div class="d-flex justify-content-between">
-            <a href="#" class="btn btn-dark border">nächste Frage</a>
-            <div><b>1</b> von <b>5</b> Fragen</div>
+              <div class="text-center mb-4">
+                Du hast X fragen von X richtig beantwortet
+              </div>
+            </div>
+            <div id="questionBody">
+              <h5
+                id="questionText"
+                class="card-title d-flex justify-content-center mb-3"
+              >
+                Frage
+              </h5>
+
+              <div class="card mb-2">
+                <div
+                  onclick="answer('answer_1')"
+                  id="answer_1"
+                  class="card-body answer-card"
+                >
+                  Antwort
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div
+                  onclick="answer('answer_2')"
+                  id="answer_2"
+                  class="card-body answer-card"
+                >
+                  Antwort
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div
+                  onclick="answer('answer_3')"
+                  id="answer_3"
+                  class="card-body answer-card"
+                >
+                  Antwort
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div
+                  onclick="answer('answer_4')"
+                  id="answer_4"
+                  class="card-body answer-card"
+                >
+                  Antwort
+                </div>
+              </div>
+              <div class="d-flex justify-content-between mt-5 card-footer">
+                <button
+                  id="nextButton"
+                  href="#"
+                  class="btn btn-dark border"
+                  onclick="nextQuestion()"
+                  disabled
+                >
+                  nächste Frage
+                </button>
+                <span
+                  ><b id="actualLength"></b> von
+                  <b id="lengthTotal"></b> Fragen</span
+                >
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   </body>
 </html>
