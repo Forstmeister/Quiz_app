@@ -81,51 +81,73 @@ let questions =[
 }
 
 ];
-
+let rightQuestions = 0;
 let currentQuestion = 0;
 
 function init(){
     let totalLength = document.getElementById("lengthTotal");
-    totalLength.innerHTML +=`${questions.length}`;
-    
+    totalLength.innerHTML =`${questions.length}`;
     showPosition();
     showQuestion ();
 }
 
 function showQuestion (){
-if(currentQuestion >= questions.length){
-document.getElementById("questionBody").style.display="none";
-document.getElementById("endScreen").style.display='';
+if(gameIsOver()){
+    showEndScreen();
 }else{
-   
+    updateToNExtQuestion();
+    updateProgressBar();
+}
 }
 
-let question = questions[currentQuestion];
+function gameIsOver(){
+    return currentQuestion >= questions.length;
+}
 
+function showEndScreen(){
+    document.getElementById("questionBody").style.display="none";
+    document.getElementById("endScreen").style.display='';
+    document.getElementById("finalScreenquestion").innerHTML =`${questions.length}`;
+    document.getElementById("amountOfRightQuestions").innerHTML =  rightQuestions;
+}
+
+function updateToNExtQuestion(){
+    
+    let question = questions[currentQuestion];
     document.getElementById("questionText").innerHTML = question['question'];  
     document.getElementById("answer_1").innerHTML = question['answer_1'];  
     document.getElementById("answer_2").innerHTML = question['answer_2'];  
     document.getElementById("answer_3").innerHTML = question['answer_3'];  
     document.getElementById("answer_4").innerHTML = question['answer_4'];  
 }
+
+function updateProgressBar(){
+    let percent = (currentQuestion +1) / questions.length
+    percent =Math.round(percent *100);
+    document.getElementById("progressBar").innerHTML = `${percent} %`;
+    document.getElementById("progressBar").style.width= `${percent}%`;
+}
+
 //slice(-1) gibt die letzte Position eines strings zurück
 //parentNode ist das übergeordnete Element z.b. div conatiner mit der klasse "card" 
 function answer(selection){
-    
     let question = questions[currentQuestion];
     let selectionNumber = selection.slice(-1);
     let numberAsNumber = parseInt(selectionNumber);
     let idOfRightAnswer = `answer_${question['right_answer']}`;
 
-        if(numberAsNumber == question['right_answer']){
+        if(rightAnswerSelected(numberAsNumber,question)){
             document.getElementById(selection).parentNode.classList.add("bg-success")
+            rightQuestions++;
             }else {
                 document.getElementById(selection).parentNode.classList.add("bg-danger");
                 document.getElementById(idOfRightAnswer).parentNode.classList.add("bg-success")
  }
  document.getElementById("nextButton").disabled = false;
+}
 
-   
+function rightAnswerSelected(numberAsNumber,question){
+return numberAsNumber == question['right_answer'];
 }
 
 function nextQuestion(){
@@ -134,8 +156,6 @@ function nextQuestion(){
     resetAnswerButtons();
     showPosition();
     showQuestion ();
-
-    
 }
 
 function resetAnswerButtons(){
@@ -147,11 +167,18 @@ function resetAnswerButtons(){
     document.getElementById("answer_3").parentNode.classList.remove("bg-danger");
     document.getElementById("answer_4").parentNode.classList.remove("bg-success");
     document.getElementById("answer_4").parentNode.classList.remove("bg-danger");
-    
 }
 
 function showPosition(){
     document.getElementById("actualLength").innerHTML="";
   let position = currentQuestion +1;
-  document.getElementById("actualLength").innerHTML +=`${position}`;
+  document.getElementById("actualLength").innerHTML =`${position}`;
+}
+
+function restartGame (){
+    rightQuestions =0;
+    currentQuestion=0;
+    document.getElementById("questionBody").style.display='';
+    document.getElementById("endScreen").style.display="none";
+    init();
 }
