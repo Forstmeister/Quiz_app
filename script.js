@@ -112,7 +112,6 @@ function showEndScreen(){
 }
 
 function updateToNExtQuestion(){
-    
     let question = questions[currentQuestion];
     document.getElementById("questionText").innerHTML = question['question'];  
     document.getElementById("answer_1").innerHTML = question['answer_1'];  
@@ -122,10 +121,17 @@ function updateToNExtQuestion(){
 }
 
 function updateProgressBar(){
+    if(currentQuestion ==0){
+        percent = 0;
+        document.getElementById("progressBar").innerHTML = 0+"%";
+        document.getElementById("progressBar").style.width= 11+"%";
+    }else {
     let percent = (currentQuestion +1) / questions.length
     percent =Math.round(percent *100);
     document.getElementById("progressBar").innerHTML = `${percent} %`;
     document.getElementById("progressBar").style.width= `${percent}%`;
+    }
+ 
 }
 
 //slice(-1) gibt die letzte Position eines strings zurück
@@ -143,7 +149,13 @@ function answer(selection){
                 document.getElementById(selection).parentNode.classList.add("bg-danger");
                 document.getElementById(idOfRightAnswer).parentNode.classList.add("bg-success")
  }
+ checkClassList();
  document.getElementById("nextButton").disabled = false;
+ notSelectedAnswer(selection,idOfRightAnswer);
+}
+
+function notSelectedAnswer(){
+
 }
 
 function rightAnswerSelected(numberAsNumber,question){
@@ -156,6 +168,8 @@ function nextQuestion(){
     resetAnswerButtons();
     showPosition();
     showQuestion ();
+    addOnclick();
+    
 }
 
 function resetAnswerButtons(){
@@ -182,3 +196,25 @@ function restartGame (){
     document.getElementById("endScreen").style.display="none";
     init();
 }
+
+function checkClassList() {
+    for (let i = 1; i <= 4; i++) {
+      const answerElement = document.getElementById(`answer_${i}`);
+      const isGreen = answerElement.parentNode.classList.contains("bg-success");
+      const isRed = answerElement.parentNode.classList.contains("bg-danger");
+  
+      if (!isGreen && !isRed) {
+        answerElement.removeAttribute("onclick");
+      } else {
+        answerElement.setAttribute("onclick", `answer('answer_${i}')`);
+      }
+     
+    }
+  }
+
+  function addOnclick(){
+    for (let i = 1; i <= 4; i++) {
+        const answerElement = document.getElementById(`answer_${i}`);
+        answerElement.setAttribute("onclick", `answer('answer_${i}')`);
+    }
+  }
